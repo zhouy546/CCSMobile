@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WriteJson : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class WriteJson : MonoBehaviour
 
         List<Page_JsonBridge> Pages = new List<Page_JsonBridge>();
 
-        Node_JsonBridge tempNode = new Node_JsonBridge("127.0.0.1","192.168.20.254",4000,29010,4,"默认按钮","03", tempstr);
+        Node_JsonBridge tempNode = new Node_JsonBridge("192.168.80.248","192.168.20.254",4000,29010,4,"默认按钮","03", tempstr);
 
         tempNodes.Add(tempNode);
 
@@ -80,6 +81,7 @@ public class WriteJson : MonoBehaviour
     void CreatJsonFile(string jsonStr, string url)
     {
         string spath = url;
+
         StringBuilder sb = new StringBuilder();
         StreamWriter sw;
         FileInfo info = new FileInfo(spath);

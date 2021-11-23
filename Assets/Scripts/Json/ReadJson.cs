@@ -5,6 +5,7 @@ using System.IO;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class ReadJson : MonoBehaviour
 {
@@ -17,16 +18,29 @@ public class ReadJson : MonoBehaviour
         }
     }
 
-    public async void readJson()
+    public string GetJsonString(string path)     //从文件里面读取json数据
+    {  //由于这里只是测试,所以就不写具体的解析数据了
+        StreamReader reader = new StreamReader(path);
+        string jsonData = reader.ReadToEnd();
+        reader.Close();
+        reader.Dispose();
+        return jsonData;
+    }
+
+    public  void readJson()
     {
       string path = Application.persistentDataPath + "/" + "JsonData.Json"; ;
 
-      string _jsonstr =  await Getjson(path);
+     
 
-      JsonData _itemDate = JsonMapper.ToObject(_jsonstr.ToString());
+        string _jsonstr = GetJsonString(path);
+
+        JsonData _itemDate = JsonMapper.ToObject(_jsonstr.ToString());
 
 
         string CCSNAME = _itemDate["CCSNAME"].ToString();
+
+    
         Debug.Log(CCSNAME);
         
         List<Page_JsonBridge> tempPage_JsonBridges = new List<Page_JsonBridge>();
@@ -50,7 +64,7 @@ public class ReadJson : MonoBehaviour
                     int TCPport = int.Parse( _itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["TCPport"].ToString());
                     int UDPport = int.Parse(_itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["UDPport"].ToString());
                     int deviceType = int.Parse(_itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["deviceType"].ToString());
-                    string m_Name = _itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["m_Name"].ToString();
+                    string m_Name = _itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["btn_name"].ToString();
                     string ProjectorSerial = _itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["ProjectorSerial"].ToString();
                     
                     List<string> OnClicksend = new List<string>();
