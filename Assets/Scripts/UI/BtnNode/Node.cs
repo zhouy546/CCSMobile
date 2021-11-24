@@ -38,4 +38,24 @@ public class Node : MonoBehaviour
     {
 
     }
+
+    public virtual int getUDPPort()
+    {
+        return 0;
+    }
+
+    public virtual int getTCPPort()
+    {
+        return 0;
+    }
+
+    public virtual string getLightID()
+    {
+        return "null";
+    }
+
+    public virtual string getProjectorSerial()
+    {
+        return "null";
+    }
 }

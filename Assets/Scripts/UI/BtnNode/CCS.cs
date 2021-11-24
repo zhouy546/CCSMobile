@@ -8,22 +8,43 @@ public class CCS : MonoBehaviour
 
     public List<Page> page = new List<Page>();
 
+    //public GameObject[] editUIBtns;
+
     public void INI(string _CCSNAME, List<Page> _page)
     {
         CCSNAME = _CCSNAME;
 
         page = _page;
+
+        //EventCenter.AddListener<bool>(EventDefine.OnEditUIClick, OnEdit);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void AddPage()
     {
-        
+        Page tempPage = CreateUI.instance.CreatePage();
+
+        List<Section> sections = new List<Section>();
+
+        tempPage.INI(ValueSheet.mobileCcs.page.Count,"default", sections);
+
+        ValueSheet.mobileCcs.page.Add(tempPage);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //private void OnEdit(bool b)
+    //{
+    //    setEditUIBtnONOFF(b);
+    //}
+
+    //private void setEditUIBtnONOFF(bool b)
+    //{
+    //    foreach (var item in editUIBtns)
+    //    {
+    //        item.SetActive(b);
+    //    }
+    //}
+
+    //private void OnDestroy()
+    //{
+    //    EventCenter.AddListener<bool>(EventDefine.OnEditUIClick, OnEdit);
+    //}
 }

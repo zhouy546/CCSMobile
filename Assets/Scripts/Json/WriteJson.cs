@@ -9,6 +9,16 @@ using UnityEngine.UI;
 
 public class WriteJson : MonoBehaviour
 {
+
+    public static WriteJson instance;
+
+    public void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -20,16 +30,14 @@ public class WriteJson : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            writeDefaultJson();
+            WriteJsonFromObject(ValueSheet.JsonUrl, ValueSheet.mobileCcs);
         }
     }
 
 
 
-    public void writeDefaultJson()
-    {
-
-        string path = Application.persistentDataPath +"/"+ "JsonData.Json";
+    public void writeDefaultJson(string path)
+    {       
 
         string[] tempstr = { "defaultStr" };
 
@@ -47,7 +55,7 @@ public class WriteJson : MonoBehaviour
 
         tempSections.Add(tempSection);
 
-        Page_JsonBridge tempPage = new Page_JsonBridge(0, tempSections);
+        Page_JsonBridge tempPage = new Page_JsonBridge(0,"默认页面标题", tempSections);
 
         Pages.Add(tempPage);
 
@@ -59,6 +67,54 @@ public class WriteJson : MonoBehaviour
 
         CreatJsonFile(json, path);
 
+    }
+
+
+
+    public void onSaveJsonBtnClick() {
+
+        WriteJsonFromObject(ValueSheet.JsonUrl, ValueSheet.mobileCcs);
+
+    }
+
+    private void WriteJsonFromObject(string path,CCS ccs) {
+        List<Page_JsonBridge> PagesBridge = new List<Page_JsonBridge>();
+        for (int i = 0; i < ccs.page.Count; i++)
+        {
+            List<Section_JsonBridge> SectionBridges = new List<Section_JsonBridge>();
+            for (int j = 0; j < ccs.page[i].Section.Count; j++)
+            {
+              
+                List<Node_JsonBridge> nodesBridges = new List<Node_JsonBridge>();
+                for (int k = 0; k < ccs.page[i].Section[j].node.Count; k++)
+                {
+                    Node tempNodee = ccs.page[i].Section[j].node[k];
+                    string ip = tempNodee.ip;
+                    string pcdeviceip = tempNodee.ip;
+                    int tcpPort = tempNodee.getTCPPort();
+                    int udpPort = tempNodee.getUDPPort();
+                    int deviceType = tempNodee.deviceType;
+                    string _name = tempNodee.BtnName;
+                    string lightid = tempNodee.getLightID();
+                    string[] onclicksend = tempNodee.OnClicksend;
+                    string projectserial = tempNodee.getProjectorSerial();
+                    Node_JsonBridge tempNode = new Node_JsonBridge(ip, pcdeviceip, tcpPort, udpPort, deviceType, _name, lightid, onclicksend, projectserial);
+                    nodesBridges.Add(tempNode);
+                }
+                Section_JsonBridge tempSection = new Section_JsonBridge(ccs.page[i].Section[j].SectionName, nodesBridges);
+                SectionBridges.Add(tempSection);
+            }
+            Page_JsonBridge tempPage = new Page_JsonBridge(i, ccs.page[i].PageTitletext.text, SectionBridges);
+            PagesBridge.Add(tempPage);
+        }
+
+
+        ValueSheet.m_MobileCCS_JsonBridge = new MobileCCS_JsonBridge(ccs.CCSNAME, PagesBridge);
+
+
+        string json = ConvertClassToJsonData(ValueSheet.m_MobileCCS_JsonBridge).ToJson();
+
+        CreatJsonFile(json, path);
     }
 
     JsonData ConvertClassToJsonData(object obj)

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2702901823769438381}
   - component: {fileID: 3922291560928123642}
+  - component: {fileID: 6222183544003065741}
   m_Layer: 5
   m_Name: CCS
   m_TagString: Untagged
@@ -48,3 +49,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e69380a86919eaf4d954ec966832fa1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CCSNAME: 
+  page: []
+  editUIBtns:
+  - {fileID: 0}
+--- !u!222 &6222183544003065741
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3114748070295598186}
+  m_CullTransparentMesh: 1

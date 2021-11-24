@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CreateUI : MonoBehaviour
 {
+    public static CreateUI instance;
+
     [SerializeField]
     private Object g_CCS;
     [SerializeField]
@@ -14,13 +16,25 @@ public class CreateUI : MonoBehaviour
     [SerializeField]
     public Object[] g_btns;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+
         EventCenter.AddListener(EventDefine.ini, iniUI);
 
         g_CCS=  Resources.Load("Prefabs/CCS", typeof(GameObject));
         g_Page = Resources.Load("Prefabs/Page", typeof(GameObject));
         g_Section = Resources.Load("Prefabs/SectionNode", typeof(GameObject));
+    }
+
+    public Page CreatePage()
+    {
+        GameObject tempG_page = Instantiate(g_Page, ValueSheet.mobileCcs.gameObject.transform) as GameObject;
+
+       return tempG_page.GetComponent<Page>();
     }
 
     private void iniUI()
@@ -36,9 +50,7 @@ public class CreateUI : MonoBehaviour
             GameObject tempG_page = Instantiate(g_Page, tempG_ccs.transform) as GameObject;
 
             Page temppage = tempG_page.GetComponent<Page>();
-
        
-
             List<Section> sections = new List<Section>();
 
             for (int j = 0; j < ValueSheet.m_MobileCCS_JsonBridge.page_JsonBridges[i].Section_JsonBridges.Count; j++)
@@ -64,12 +76,10 @@ public class CreateUI : MonoBehaviour
                 sections.Add(tempsection);
             }
 
-            temppage.INI(ValueSheet.m_MobileCCS_JsonBridge.page_JsonBridges[i].pageNum, sections);
+            temppage.INI(ValueSheet.m_MobileCCS_JsonBridge.page_JsonBridges[i].pageNum, ValueSheet.m_MobileCCS_JsonBridge.page_JsonBridges[i].pageTitle , sections);
 
             pages.Add(temppage);
         }
-
-        
 
         ValueSheet.mobileCcs.INI(ValueSheet.m_MobileCCS_JsonBridge.CCSNAME, pages);
 

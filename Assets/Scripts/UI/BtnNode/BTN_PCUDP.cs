@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BTN_PCUDP : Node
 {
     public int udpPort;
+    public Text btnText;
     // Start is called before the first frame update
     public override void Start()
     {
@@ -22,7 +24,7 @@ public class BTN_PCUDP : Node
     {
         base.INI(_node_JsonBridge);
         udpPort = _node_JsonBridge.UDPport;
-
+        btnText.text = _node_JsonBridge.btn_name;
     }
 
     
@@ -33,6 +35,11 @@ public class BTN_PCUDP : Node
 
         send().GetAwaiter();
       
+    }
+
+    public override int getUDPPort()
+    {
+        return udpPort;
     }
 
 

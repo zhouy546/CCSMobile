@@ -1,4 +1,5 @@
 ﻿public enum EventDefine
 {
-    ini,
+    ini,OnEditUIClick,
+    OnObjectAddInCurrentEditor
 }

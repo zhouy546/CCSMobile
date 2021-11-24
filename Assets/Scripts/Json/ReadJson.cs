@@ -10,13 +10,16 @@ using UnityEngine.UI;
 public class ReadJson : MonoBehaviour
 {
 
-    public void Update()
+    public static ReadJson instance;
+
+    public void Awake()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (instance == null)
         {
-            readJson();
+            instance = this;
         }
     }
+
 
     public string GetJsonString(string path)     //从文件里面读取json数据
     {  //由于这里只是测试,所以就不写具体的解析数据了
@@ -27,12 +30,8 @@ public class ReadJson : MonoBehaviour
         return jsonData;
     }
 
-    public  void readJson()
+    public  void readJson(string path)
     {
-      string path = Application.persistentDataPath + "/" + "JsonData.Json"; ;
-
-     
-
         string _jsonstr = GetJsonString(path);
 
         JsonData _itemDate = JsonMapper.ToObject(_jsonstr.ToString());
@@ -46,8 +45,10 @@ public class ReadJson : MonoBehaviour
         List<Page_JsonBridge> tempPage_JsonBridges = new List<Page_JsonBridge>();
         for (int i = 0; i < _itemDate["page_JsonBridges"].Count; i++)
         {
-            int pageNum = int.Parse( _itemDate["page_JsonBridges"][i]["pageNum"].ToString());
-            Debug.Log(pageNum);
+            int pageNum = i;
+
+            string PageTitle = _itemDate["page_JsonBridges"][i]["pageTitle"].ToString();
+
 
             List<Section_JsonBridge> tempSection_JsonBridges = new List<Section_JsonBridge>();
             for (int k = 0; k < _itemDate["page_JsonBridges"][i]["Section_JsonBridges"].Count; k++)
@@ -81,7 +82,7 @@ public class ReadJson : MonoBehaviour
                 tempSection_JsonBridges.Add(section_JsonBridge);
             }
 
-            Page_JsonBridge Page_JsonBridge = new Page_JsonBridge(pageNum, tempSection_JsonBridges);
+            Page_JsonBridge Page_JsonBridge = new Page_JsonBridge(pageNum, PageTitle, tempSection_JsonBridges);
             tempPage_JsonBridges.Add(Page_JsonBridge);
         }
 
@@ -94,34 +95,5 @@ public class ReadJson : MonoBehaviour
 
 
 
-    public static async Task<string> Getjson(string url)
-    {
-        using (UnityWebRequest www = UnityWebRequest.Get(url))
-        {
-            // begin request:
-            var asyncOp = www.SendWebRequest();
 
-            // await until it's done: 
-            while (asyncOp.isDone == false)
-                await Task.Delay(1000 / 30);//30 hertz
-
-            // read results:
-            if (www.isNetworkError || www.isHttpError)
-            {
-                // log error:
-#if DEBUG
-                Debug.Log($"{www.error}, URL:{www.url}");
-#endif
-
-                // nothing to return on error:
-                return null;
-            }
-            else
-            {
-                string _jsonString = System.Text.Encoding.UTF8.GetString(www.downloadHandler.data);
-                // return valid results:
-                return _jsonString;
-            }
-        }
-    }
 }
