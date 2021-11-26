@@ -15,27 +15,48 @@ public class Section : MonoBehaviour
 
     public GameObject SelectBtn;
 
-    public void INI(string _SectionName, List<Node> _nodes)
+    public GameObject DeleteBtn;
+
+    private Page parentPage;
+    public void INI(string _SectionName,Page _page, List<Node> _nodes)
     {
         TitleText.text =SectionName = _SectionName;
 
         node = _nodes;
 
+        parentPage = _page;
+
         EventCenter.AddListener<bool>(EventDefine.OnEditUIClick, OnEdit);
 
         OnEdit(ValueSheet.isEditMode);
+
     }
 
-    public void AddSectionToCurrentSelectSection()
+    public void ShowAddNodeUI()
     {
         ValueSheet.currentSelectSection = this;
-        object OBJ = this;
-        EventCenter.Broadcast(EventDefine.OnObjectAddInCurrentEditor, OBJ);
+
+        AddNodeUICtr.instance.gameObject.SetActive(true);
     }
+
+    public void SectionDelete()
+    {
+        ValueSheet.currentSelectSection = this;
+
+        ValueSheet.currentSelectPage = parentPage;
+
+        parentPage.Section.Remove(this);
+
+        Destroy(this.gameObject, 0.5f);
+
+    }
+
 
     private void OnEdit(bool b)
     {
         SelectBtn.SetActive(b);
+
+        DeleteBtn.SetActive(b);
     }
 
 }

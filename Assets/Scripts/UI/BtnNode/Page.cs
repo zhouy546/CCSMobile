@@ -16,12 +16,11 @@ public class Page : MonoBehaviour
 
     public Transform SectionParent;
 
-    //public GameObject[] editUIBtns;
+    public GameObject[] editUIBtns;
 
-    public GameObject SelectBtn;
+    public InputField EditTitleInputField;
 
-    //public InputField EditTitleInputField;
-
+    public Button TitleSubmitBtn;
 
 
     public void INI(int _pageNum, string _pageTitle,List<Section> _Section)
@@ -37,28 +36,42 @@ public class Page : MonoBehaviour
         OnEdit(ValueSheet.isEditMode);
     }
 
-    public void AddPageToCurrentSelectPage()
-    {
-        ValueSheet.currentSelectPage = this;
-        object OBJ = this;
-        EventCenter.Broadcast(EventDefine.OnObjectAddInCurrentEditor,OBJ);
-    }
-
-    public void DeletePage()
-    {
-        ValueSheet.mobileCcs.page.Remove(this);
-
-        Destroy(this.gameObject, 0.5f);
-    }
 
     private void OnEdit(bool b)
     {
-        SelectBtn.SetActive(b);
+        foreach (var item in editUIBtns)
+        {
+            item.SetActive(b);
+        }
+  
     }
 
-    public void AddSection()
+    public void ClickEditTitleBtn()
     {
+        EditTitleInputField.gameObject.SetActive(!EditTitleInputField.gameObject.active);
+        TitleSubmitBtn.gameObject.SetActive(!TitleSubmitBtn.gameObject.active);
+    }
 
+    public void SubmitTitleChange()
+    {
+        ValueSheet.currentSelectPage = this;
+        PageTitletext.text = EditTitleInputField.text;
+
+        EditTitleInputField.gameObject.SetActive(false);
+        TitleSubmitBtn.gameObject.SetActive(false);
+    }
+
+    public void SectionADD()
+    {
+        ValueSheet.currentSelectPage = this;
+
+        Section temp = CreateUI.instance.CreateSection();
+
+        List<Node> nodes = new List<Node>();
+
+        temp.INI("defaultName", this, nodes);
+
+        Section.Add(temp);
     }
 
     private void OnDestroy()

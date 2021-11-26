@@ -8,14 +8,14 @@ public class EditUI : MonoBehaviour
     public GameObject ccsTitleEditor;
     public InputField PageTitleInputField;
 
+    public GameObject G_cssEditor;
     public GameObject G_pageEditor;
     public GameObject G_selectEditor;
-    public GameObject G_nodeEditor;
 
     // Start is called before the first frame update
     void Start()
     {
-        EventCenter.AddListener<object>(EventDefine.OnObjectAddInCurrentEditor, EditorSwitch);
+      //  EventCenter.AddListener<object>(EventDefine.OnObjectAddInCurrentEditor, EditorSwitch);
     }
 
     // Update is called once per frame
@@ -25,40 +25,42 @@ public class EditUI : MonoBehaviour
     }
 
 
-    public void EditorSwitch(object obj)
-    {
-        if(object.Equals(ValueSheet.currentSelectPage, obj))
-        {
-            G_pageEditor.SetActive(true);
-            G_selectEditor.SetActive(false);
-            G_nodeEditor.SetActive(false);
-        }
-        else if(object.Equals(ValueSheet.currentSelectSection, obj))
-        {
-            G_pageEditor.SetActive(false);
-            G_selectEditor.SetActive(true);
-            G_nodeEditor.SetActive(false);
-        }
-        else if (object.Equals(ValueSheet.currentSelectNode, obj))
-        {
-            G_pageEditor.SetActive(false);
-            G_selectEditor.SetActive(false);
-            G_nodeEditor.SetActive(true);
-        }
-    }
-
-
     public void OnEditUIClick()
     {
         ValueSheet.isEditMode = !ValueSheet.isEditMode;
         EventCenter.Broadcast(EventDefine.OnEditUIClick, ValueSheet.isEditMode);
     }
+
     #region CCS UI EDITOR
+
+    public void PageAdd()
+    {
+        Page tempPage = CreateUI.instance.CreatePage();
+
+        List<Section> sections = new List<Section>();
+
+        tempPage.INI(ValueSheet.mobileCcs.page.Count, "default", sections);
+
+        ValueSheet.mobileCcs.page.Add(tempPage);
+    }
+
+    public void PageDelete()
+    {
+        ValueSheet.mobileCcs.page.Remove(ValueSheet.currentSelectPage);
+
+        Destroy(ValueSheet.currentSelectPage.gameObject, 0.5f);
+    }
+
+    #endregion
+
+
+    #region PAGE UI EDITOR
 
     public void PageTitleEditorONOFF()
     {
         ccsTitleEditor.SetActive(!ccsTitleEditor.active);
     }
+
 
 
     public void PageTitleSubmit()
@@ -73,5 +75,10 @@ public class EditUI : MonoBehaviour
             ValueSheet.currentSelectPage.PageTitletext.text = PageTitleInputField.text;
         }
     }
+    #endregion
+
+    #region Section UI EDITOR
+
+
     #endregion
 }

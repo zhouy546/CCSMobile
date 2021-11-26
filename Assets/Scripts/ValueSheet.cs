@@ -6,6 +6,7 @@ public static class ValueSheet
 {
     public static MobileCCS_JsonBridge m_MobileCCS_JsonBridge;
     public static CCS mobileCcs;
+    public static CCS currentSelectCCS; 
     public static Page currentSelectPage;
     public static Section currentSelectSection;
     public static Node currentSelectNode;

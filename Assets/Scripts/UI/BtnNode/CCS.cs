@@ -8,7 +8,8 @@ public class CCS : MonoBehaviour
 
     public List<Page> page = new List<Page>();
 
-    //public GameObject[] editUIBtns;
+    public GameObject SelectBtn;
+
 
     public void INI(string _CCSNAME, List<Page> _page)
     {
@@ -16,35 +17,27 @@ public class CCS : MonoBehaviour
 
         page = _page;
 
-        //EventCenter.AddListener<bool>(EventDefine.OnEditUIClick, OnEdit);
+        EventCenter.AddListener<bool>(EventDefine.OnEditUIClick, OnEdit);
+
+        OnEdit(ValueSheet.isEditMode);
     }
 
-    public void AddPage()
+    public void AddCCSToCurrentSelectCCS()
     {
-        Page tempPage = CreateUI.instance.CreatePage();
-
-        List<Section> sections = new List<Section>();
-
-        tempPage.INI(ValueSheet.mobileCcs.page.Count,"default", sections);
-
-        ValueSheet.mobileCcs.page.Add(tempPage);
+        ValueSheet.currentSelectCCS = this;
+        object OBJ = this;
+        //EventCenter.Broadcast(EventDefine.OnObjectAddInCurrentEditor, OBJ);
     }
 
-    //private void OnEdit(bool b)
-    //{
-    //    setEditUIBtnONOFF(b);
-    //}
 
-    //private void setEditUIBtnONOFF(bool b)
-    //{
-    //    foreach (var item in editUIBtns)
-    //    {
-    //        item.SetActive(b);
-    //    }
-    //}
 
-    //private void OnDestroy()
-    //{
-    //    EventCenter.AddListener<bool>(EventDefine.OnEditUIClick, OnEdit);
-    //}
+    private void OnEdit(bool b)
+    {
+        SelectBtn.SetActive(b);
+    }
+
+    private void OnDestroy()
+    {
+        EventCenter.AddListener<bool>(EventDefine.OnEditUIClick, OnEdit);
+    }
 }

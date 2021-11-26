@@ -20,30 +20,37 @@ public class Utility : MonoBehaviour
 
         Debug.Log("unknowDevice");
         return null;
-    } 
+    }
+
+
+    public static string[] convertStringtoStringArray(string s)
+    {
+        return s.Split('-');
+    }
 
     public static DeviceType GetDeviceType(Node_JsonBridge node_JsonBridge)
     {
         if (node_JsonBridge.deviceType == 0)
         {
-            return DeviceType.pc_on_off;
+            return DeviceType.pcUDP;
         }
         if (node_JsonBridge.deviceType == 1)
         {
-            return DeviceType.projector;
+            return DeviceType.pc_on_off;
         }
         if (node_JsonBridge.deviceType == 2)
         {
-            return DeviceType.led;
+            return DeviceType.projector;
         }
         if (node_JsonBridge.deviceType == 3)
         {
-            return DeviceType.light;
+            return DeviceType.led;
         }
         if (node_JsonBridge.deviceType == 4)
         {
-            return DeviceType.pcUDP;
+            return DeviceType.light;
         }
+
 
         return DeviceType.Unknow;
     }

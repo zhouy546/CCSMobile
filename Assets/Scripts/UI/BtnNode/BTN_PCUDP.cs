@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -47,7 +48,7 @@ public class BTN_PCUDP : Node
     {
         for (int i = 0; i < OnClicksend.Length; i++)
         {
-            SendUPDData.instance.udp_Send(OnClicksend[0], ip, udpPort);
+            SendUPDData.instance.udp_Send(OnClicksend[i], ip, udpPort);
             await Task.Delay(500);
             Debug.Log("Wait 500millsecond");
         }

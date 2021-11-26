@@ -47,7 +47,7 @@ public class WriteJson : MonoBehaviour
 
         List<Page_JsonBridge> Pages = new List<Page_JsonBridge>();
 
-        Node_JsonBridge tempNode = new Node_JsonBridge("192.168.80.248","192.168.20.254",4000,29010,4,"默认按钮","03", tempstr);
+        Node_JsonBridge tempNode = new Node_JsonBridge("192.168.80.248","192.168.20.254",4000,29010,0,"默认按钮","03", tempstr);
 
         tempNodes.Add(tempNode);
 

@@ -37,6 +37,15 @@ public class CreateUI : MonoBehaviour
        return tempG_page.GetComponent<Page>();
     }
 
+    public Section CreateSection()
+    {
+        GameObject tempG_section = Instantiate(g_Section, ValueSheet.currentSelectPage.SectionParent) as GameObject;
+
+        return tempG_section.GetComponent<Section>();
+    }
+
+
+
     private void iniUI()
     {
         GameObject tempG_ccs = Instantiate(g_CCS,this.transform) as GameObject;
@@ -71,7 +80,7 @@ public class CreateUI : MonoBehaviour
 
                     nodes.Add(node);
                 }
-                tempsection.INI(ValueSheet.m_MobileCCS_JsonBridge.page_JsonBridges[i].Section_JsonBridges[j].SectionName, nodes);
+                tempsection.INI(ValueSheet.m_MobileCCS_JsonBridge.page_JsonBridges[i].Section_JsonBridges[j].SectionName, temppage, nodes);
 
                 sections.Add(tempsection);
             }
@@ -82,6 +91,8 @@ public class CreateUI : MonoBehaviour
         }
 
         ValueSheet.mobileCcs.INI(ValueSheet.m_MobileCCS_JsonBridge.CCSNAME, pages);
+
+        ValueSheet.currentSelectPage = ValueSheet.mobileCcs.page[0];
 
     }
 
