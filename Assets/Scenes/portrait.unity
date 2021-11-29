@@ -2022,6 +2022,10 @@ MonoBehaviour:
   g_Section: {fileID: 0}
   g_btns:
   - {fileID: 9121979721253942802, guid: baf6e4f9c4883114fbefa91f94b5d408, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 9121979721253942802, guid: 63e97be28f3d16440a4cab61e923401e, type: 3}
 --- !u!1 &538768228
 GameObject:
   m_ObjectHideFlags: 0
@@ -3303,7 +3307,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "UDP\u7AEF\u53E3\uFF1A"
+  m_Text: "TCP\u7AEF\u53E3\uFF1A"
 --- !u!222 &1078820762
 CanvasRenderer:
   m_ObjectHideFlags: 0

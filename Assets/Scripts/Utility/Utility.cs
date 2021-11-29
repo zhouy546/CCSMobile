@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
@@ -17,9 +18,20 @@ public class Utility : MonoBehaviour
             return tempG_node.GetComponent<BTN_PCUDP>();
         }
 
+        if (deviceType == DeviceType.light)
+        {
+            GameObject tempG_node = Instantiate(_createUI.g_btns[4], partent) as GameObject;
+            return tempG_node.GetComponent<BTN_LightTCP>();
+        }
+
 
         Debug.Log("unknowDevice");
         return null;
+    }
+
+    public string convertDropDownToLightID(string s)
+    {
+        return "null";
     }
 
 
@@ -53,6 +65,31 @@ public class Utility : MonoBehaviour
 
 
         return DeviceType.Unknow;
+    }
+
+    public static bool checkIp(string ipStr)
+    {
+        IPAddress ip;
+        if (IPAddress.TryParse(ipStr, out ip))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    //十六进制字符串转byte数组
+    public static byte[] strToToHexByte(string hexString)
+    {
+        hexString = hexString.Replace(" ", "");
+        if ((hexString.Length % 2) != 0)
+            hexString += " ";
+        byte[] returnBytes = new byte[hexString.Length / 2];
+        for (int i = 0; i < returnBytes.Length; i++)
+            returnBytes[i] = Convert.ToByte(hexString.Substring(i * 2, 2), 16);
+        return returnBytes;
     }
 
 }

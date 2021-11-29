@@ -21,9 +21,9 @@ public class BTN_PCUDP : Node
         base.Update();
     }
 
-    public override void INI(Node_JsonBridge _node_JsonBridge)
+    public override void INI(Node_JsonBridge _node_JsonBridge,Section parentSection)
     {
-        base.INI(_node_JsonBridge);
+        base.INI(_node_JsonBridge, parentSection);
         udpPort = _node_JsonBridge.UDPport;
         btnText.text = _node_JsonBridge.btn_name;
     }
@@ -52,5 +52,19 @@ public class BTN_PCUDP : Node
             await Task.Delay(500);
             Debug.Log("Wait 500millsecond");
         }
+    }
+
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+    }
+
+    public override void DestoryBtn()
+    {
+        ValueSheet.currentSelectNode = this;
+
+        parentSection.node.Remove(this);
+
+        base.DestoryBtn();
     }
 }

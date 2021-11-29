@@ -73,10 +73,9 @@ public class CreateUI : MonoBehaviour
                 {
                     Node_JsonBridge node_JsonBridge = ValueSheet.m_MobileCCS_JsonBridge.page_JsonBridges[i].Section_JsonBridges[j].node_JsonBridges[k];
 
-
                     Node node =   Utility.CreateNode(this, node_JsonBridge, tempsection.btnParent);
 
-                    node.INI(node_JsonBridge);
+                    node.INI(node_JsonBridge, tempsection);
 
                     nodes.Add(node);
                 }

@@ -81,42 +81,24 @@ public class AddNodeUICtr : MonoBehaviour
         Debug.Log(deviceType);
 
         string BtnName = btnNameInputField.text;
-        string lightID = "03";
+        string lightID = lightidDropdown.options[lightidDropdown.value].text;
         string[] sendContent = Utility.convertStringtoStringArray(sendContentInputField.text);
         string ProjectorSerial = "PJLink";
 
 
-        if (NodeUiDropDown.value == 0)
+
+        Node_JsonBridge node_JsonBridge = new Node_JsonBridge(ip, deviceip, tcpPort, udpPort, deviceType, BtnName, lightID, sendContent, ProjectorSerial);
+        Node TEMPNODE =  Utility.CreateNode(CreateUI.instance, node_JsonBridge, ValueSheet.currentSelectSection.btnParent);
+
+        TEMPNODE.INI(node_JsonBridge,ValueSheet.currentSelectSection);
+
+        if (TEMPNODE == null)
         {
-            Node_JsonBridge node_JsonBridge = new Node_JsonBridge(ip, deviceip, tcpPort, udpPort, deviceType, BtnName, lightID, sendContent, ProjectorSerial);
-            Node TEMPNODE =  Utility.CreateNode(CreateUI.instance, node_JsonBridge, ValueSheet.currentSelectSection.btnParent);
-
-            TEMPNODE.INI(node_JsonBridge);
-
-            if (TEMPNODE == null)
-            {
-                return;
-            }
-            else
-            {
-                ValueSheet.currentSelectSection.node.Add(TEMPNODE);
-            }
+            return;
         }
-        else if(NodeUiDropDown.value == 1)
+        else
         {
-
-        }
-        else if (NodeUiDropDown.value == 2)
-        {
-
-        }
-        else if (NodeUiDropDown.value == 3)
-        {
-
-        }
-        else if (NodeUiDropDown.value == 4)
-        {
-
+            ValueSheet.currentSelectSection.node.Add(TEMPNODE);
         }
 
         OffUi();
