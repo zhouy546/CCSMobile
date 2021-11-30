@@ -22,6 +22,10 @@ public class Page : MonoBehaviour
 
     public Button TitleSubmitBtn;
 
+    public Page Pervious;
+
+    public Page Next;
+
 
     public void INI(int _pageNum, string _pageTitle,List<Section> _Section)
     {
@@ -35,7 +39,15 @@ public class Page : MonoBehaviour
 
         OnEdit(ValueSheet.isEditMode);
     }
+    public void MoveAway()
+    {
+        this.transform.localPosition = new Vector3(5000, 0, 0);
+    }
 
+    public void MoveIn()
+    {
+        this.transform.localPosition = new Vector3(0, 0, 0);
+    }
 
     private void OnEdit(bool b)
     {

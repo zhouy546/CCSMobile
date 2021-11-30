@@ -58,6 +58,7 @@ public class ReadJson : MonoBehaviour
                 Debug.Log(SectionName);
 
                 List < Node_JsonBridge > tempNode_JsonBridges = new List<Node_JsonBridge>();
+
                 for (int j = 0; j < _itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"].Count; j++)
                 {
                     string ip = _itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["ip"].ToString();
@@ -89,12 +90,9 @@ public class ReadJson : MonoBehaviour
 
         ValueSheet.m_MobileCCS_JsonBridge= new MobileCCS_JsonBridge(CCSNAME, tempPage_JsonBridges);
 
-        Debug.Log(ValueSheet.m_MobileCCS_JsonBridge.page_JsonBridges[0].Section_JsonBridges[0].node_JsonBridges[0].OnClicksend[0]);
+        Debug.Log(ValueSheet.m_MobileCCS_JsonBridge.CCSNAME);
 
         EventCenter.Broadcast(EventDefine.ini);
     }
-
-
-
 
 }
