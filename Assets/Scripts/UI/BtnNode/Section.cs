@@ -5,56 +5,66 @@ using UnityEngine.UI;
 
 public class Section : MonoBehaviour
 {
+    public Text TitleText;
+
     public string SectionName;
+
+    public SectionType sectionType;
 
     public List<Node> node = new List<Node>();
 
+    public Page parentPage;
+
     public Transform btnParent;
 
-    public Text TitleText;
-
-    public GameObject SelectBtn;
+    public GameObject AddNodeBtn;
 
     public GameObject DeleteBtn;
 
-    private Page parentPage;
-    public void INI(string _SectionName,Page _page, List<Node> _nodes)
+
+
+
+
+    public virtual void INI(Section_JsonBridge _section_JsonBridge, Page _page, List<Node> _nodes)
     {
-        TitleText.text =SectionName = _SectionName;
 
         node = _nodes;
 
+        TitleText.text = SectionName = _section_JsonBridge.SectionName;
+
         parentPage = _page;
+
+        sectionType = Utility.getSectionType(_section_JsonBridge);
 
         EventCenter.AddListener<bool>(EventDefine.OnEditUIClick, OnEdit);
 
         OnEdit(ValueSheet.isEditMode);
-
     }
 
-    public void ShowAddNodeUI()
+
+    public virtual void ShowAddNodeUI()
     {
         ValueSheet.currentSelectSection = this;
 
-        AddNodeUICtr.instance.gameObject.SetActive(true);
+        AddNodeUICtr.instance.TurnOnMe();
     }
 
-    public void SectionDelete()
+    public virtual void SectionDelete()
     {
         ValueSheet.currentSelectSection = this;
 
         ValueSheet.currentSelectPage = parentPage;
 
-        parentPage.Section.Remove(this);
+        parentPage.m_Section.Remove(this);
 
         Destroy(this.gameObject, 0.5f);
 
     }
 
 
-    private void OnEdit(bool b)
+    public virtual void OnEdit(bool b)
     {
-        SelectBtn.SetActive(b);
+        AddNodeBtn.SetActive(b);
 
         DeleteBtn.SetActive(b);
     }

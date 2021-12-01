@@ -1759,8 +1759,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f274d84e0047b304fbad42122e647467, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIS:
-  - name: PC_udp
+  MediaSectionUIS:
+  - name: udp
     uiShow:
     - {fileID: 1098165859}
     - {fileID: 1646780054}
@@ -1772,6 +1772,7 @@ MonoBehaviour:
     - {fileID: 451317766}
     - {fileID: 941714119}
     - {fileID: 311905857}
+  UIS:
   - name: "PC_\u5F00\u5173"
     uiShow:
     - {fileID: 1098165859}
@@ -2019,7 +2020,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   g_CCS: {fileID: 0}
   g_Page: {fileID: 0}
-  g_Section: {fileID: 0}
+  g_Sections:
+  - {fileID: 304152356587996772, guid: ddf265cdfafb3a64b817849c4027b384, type: 3}
+  - {fileID: 304152356587996772, guid: 4ff9ac3ac72115947912a9bde6f3de8c, type: 3}
   g_btns:
   - {fileID: 9121979721253942802, guid: baf6e4f9c4883114fbefa91f94b5d408, type: 3}
   - {fileID: 0}

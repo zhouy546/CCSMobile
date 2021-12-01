@@ -67,6 +67,52 @@ public class Utility : MonoBehaviour
         return DeviceType.Unknow;
     }
 
+    public static int ConvertDropDownValueToDeviceType(int index, SectionType sectionType)
+    {
+        if (sectionType == SectionType.MediaSection)
+        {
+            return  0;
+        }
+        else if(sectionType == SectionType.HardWareSection)
+        {
+            return index + 1;
+        }
+
+        return 0;
+    }
+
+    public static SectionType getSectionType(Section_JsonBridge _section_JsonBridge) {
+        if (_section_JsonBridge.sectionType == 0)
+        {
+            return SectionType.MediaSection;
+        }
+        if (_section_JsonBridge.sectionType == 1)
+        {
+            return SectionType.HardWareSection;
+        }
+
+        return SectionType.Unknow;
+    }
+
+    public static int convertSectionTypeToInt(Section section)
+    {
+        if (section.sectionType == SectionType.MediaSection)
+        {
+            return 0;
+        }
+        if (section.sectionType == SectionType.HardWareSection)
+        {
+            return 1;
+        }
+        if(section.sectionType == SectionType.Unknow)
+        {
+            return -1;
+        }
+        return -1;
+    }
+
+
+
     public static bool checkIp(string ipStr)
     {
         IPAddress ip;

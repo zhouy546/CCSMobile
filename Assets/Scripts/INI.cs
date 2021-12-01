@@ -23,13 +23,13 @@ public class INI : MonoBehaviour
             DebugText.instance.Log("File not exists");
             WriteJson.instance.writeDefaultJson(spath);
             await Task.Delay(500);
-            ReadJson.instance.readJson(spath);
+           StartCoroutine( ReadJson.instance.readJson(spath));
         }
         else
         {
             await Task.Delay(500);
             DebugText.instance.Log("File exists");
-            ReadJson.instance.readJson(spath);
+            StartCoroutine(ReadJson.instance.readJson(spath));
         }
     }
 

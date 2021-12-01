@@ -61,7 +61,7 @@ public class BTN_LightTCP : Node
         }
     }
 
-    public void OffClick()
+    public override void OffClick()
     {
         if (Utility.checkIp(ip))
         {

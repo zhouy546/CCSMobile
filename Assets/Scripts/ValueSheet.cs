@@ -30,3 +30,8 @@ public enum DeviceType
 {
     pcUDP,pc_on_off,projector,led,light,Unknow
 }
+
+public enum SectionType
+{
+    MediaSection,HardWareSection,Unknow
+}

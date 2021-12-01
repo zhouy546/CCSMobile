@@ -30,9 +30,11 @@ public class ReadJson : MonoBehaviour
         return jsonData;
     }
 
-    public  void readJson(string path)
+    public  IEnumerator readJson(string path)
     {
         string _jsonstr = GetJsonString(path);
+
+        yield return new WaitForSeconds(0.1f);
 
         JsonData _itemDate = JsonMapper.ToObject(_jsonstr.ToString());
 
@@ -41,21 +43,21 @@ public class ReadJson : MonoBehaviour
 
     
         Debug.Log(CCSNAME);
-        
+        Debug.Log(_itemDate["page_JsonBridges"].Count);
         List<Page_JsonBridge> tempPage_JsonBridges = new List<Page_JsonBridge>();
         for (int i = 0; i < _itemDate["page_JsonBridges"].Count; i++)
         {
+   
             int pageNum = i;
 
             string PageTitle = _itemDate["page_JsonBridges"][i]["pageTitle"].ToString();
 
-
+            Debug.Log(_itemDate["page_JsonBridges"][i]["Section_JsonBridges"].Count);
             List<Section_JsonBridge> tempSection_JsonBridges = new List<Section_JsonBridge>();
             for (int k = 0; k < _itemDate["page_JsonBridges"][i]["Section_JsonBridges"].Count; k++)
             {
                 string SectionName = _itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["SectionName"].ToString();
-
-                Debug.Log(SectionName);
+                int SectionType =int.Parse(_itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["sectionType"].ToString());
 
                 List < Node_JsonBridge > tempNode_JsonBridges = new List<Node_JsonBridge>();
 
@@ -80,7 +82,8 @@ public class ReadJson : MonoBehaviour
                     tempNode_JsonBridges.Add(node_JsonBridge);
                 }
 
-                Section_JsonBridge section_JsonBridge = new Section_JsonBridge(SectionName, tempNode_JsonBridges);
+                Section_JsonBridge section_JsonBridge = new Section_JsonBridge(SectionName, SectionType, tempNode_JsonBridges);
+
                 tempSection_JsonBridges.Add(section_JsonBridge);
             }
 
@@ -88,8 +91,10 @@ public class ReadJson : MonoBehaviour
             tempPage_JsonBridges.Add(Page_JsonBridge);
         }
 
-        ValueSheet.m_MobileCCS_JsonBridge= new MobileCCS_JsonBridge(CCSNAME, tempPage_JsonBridges);
+        yield return new WaitForSeconds(0.1f);
 
+        ValueSheet.m_MobileCCS_JsonBridge= new MobileCCS_JsonBridge(CCSNAME, tempPage_JsonBridges);
+        yield return new WaitForSeconds(0.1f);
         Debug.Log(ValueSheet.m_MobileCCS_JsonBridge.CCSNAME);
 
         EventCenter.Broadcast(EventDefine.ini);

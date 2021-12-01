@@ -51,7 +51,7 @@ public class WriteJson : MonoBehaviour
 
         tempNodes.Add(tempNode);
 
-        Section_JsonBridge tempSection = new Section_JsonBridge("默认区块", tempNodes);
+        Section_JsonBridge tempSection = new Section_JsonBridge("默认区块",0, tempNodes);
 
         tempSections.Add(tempSection);
 
@@ -82,13 +82,13 @@ public class WriteJson : MonoBehaviour
         for (int i = 0; i < ccs.page.Count; i++)
         {
             List<Section_JsonBridge> SectionBridges = new List<Section_JsonBridge>();
-            for (int j = 0; j < ccs.page[i].Section.Count; j++)
+            for (int j = 0; j < ccs.page[i].m_Section.Count; j++)
             {
               
                 List<Node_JsonBridge> nodesBridges = new List<Node_JsonBridge>();
-                for (int k = 0; k < ccs.page[i].Section[j].node.Count; k++)
+                for (int k = 0; k < ccs.page[i].m_Section[j].node.Count; k++)
                 {
-                    Node tempNodee = ccs.page[i].Section[j].node[k];
+                    Node tempNodee = ccs.page[i].m_Section[j].node[k];
                     string ip = tempNodee.ip;
                     string pcdeviceip = tempNodee.ip;
                     int tcpPort = tempNodee.getTCPPort();
@@ -101,7 +101,7 @@ public class WriteJson : MonoBehaviour
                     Node_JsonBridge tempNode = new Node_JsonBridge(ip, pcdeviceip, tcpPort, udpPort, deviceType, _name, lightid, onclicksend, projectserial);
                     nodesBridges.Add(tempNode);
                 }
-                Section_JsonBridge tempSection = new Section_JsonBridge(ccs.page[i].Section[j].SectionName, nodesBridges);
+                Section_JsonBridge tempSection = new Section_JsonBridge(ccs.page[i].m_Section[j].SectionName, Utility.convertSectionTypeToInt(ccs.page[i].m_Section[j]), nodesBridges);
                 SectionBridges.Add(tempSection);
             }
             Page_JsonBridge tempPage = new Page_JsonBridge(i, ccs.page[i].PageTitletext.text, SectionBridges);

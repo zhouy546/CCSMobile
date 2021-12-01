@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class AddNodeUICtr : MonoBehaviour
 {
+  
+
+    public List<ShouldDisplayUI> MediaSectionUIS = new List<ShouldDisplayUI>();
+
     public List<ShouldDisplayUI> UIS = new List<ShouldDisplayUI>();
 
     public InputField btnNameInputField;
@@ -25,8 +29,11 @@ public class AddNodeUICtr : MonoBehaviour
 
     public static AddNodeUICtr instance;
 
+    private Sprite TEMPSPRITE;
+  
+    List<Dropdown.OptionData> MEDIATYPE_DROPDownOption = new List<Dropdown.OptionData>();
 
-
+    List<Dropdown.OptionData> HARDWAREDEVICE_DROPDownOption = new List<Dropdown.OptionData>();
     public void Awake()
     {
         if (instance==null)
@@ -35,24 +42,52 @@ public class AddNodeUICtr : MonoBehaviour
         }
 
         OffUi();
-    }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+        Dropdown.OptionData UDPBTN_optionData = new Dropdown.OptionData();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        UDPBTN_optionData.text = "UPD按钮";
+
+        MEDIATYPE_DROPDownOption.Add(UDPBTN_optionData);
+
+        Dropdown.OptionData PC_optionData = new Dropdown.OptionData("PC开关", TEMPSPRITE);
+
+        Dropdown.OptionData Projector_optionData = new Dropdown.OptionData("投影机开关", TEMPSPRITE);
+
+        Dropdown.OptionData led_optionData = new Dropdown.OptionData("LED电柜开关", TEMPSPRITE);
+
+        Dropdown.OptionData light_optionData = new Dropdown.OptionData("灯光开关", TEMPSPRITE);
+
+        HARDWAREDEVICE_DROPDownOption.Add(PC_optionData);
+
+        HARDWAREDEVICE_DROPDownOption.Add(Projector_optionData);
+
+        HARDWAREDEVICE_DROPDownOption.Add(led_optionData);
+
+        HARDWAREDEVICE_DROPDownOption.Add(light_optionData);
+
+
     }
 
     private void OnEnable()
     {
-
+        
         BtnTypeDropDownValueChanged(NodeUiDropDown);
+
+    
+    }
+
+    public void TurnOnMe()
+    {
+       gameObject.SetActive(true);
+        if (ValueSheet.currentSelectSection.sectionType == SectionType.MediaSection)
+        {
+            NodeUiDropDown.options = MEDIATYPE_DROPDownOption;
+        }
+        else if (ValueSheet.currentSelectSection.sectionType == SectionType.HardWareSection)
+        {
+            NodeUiDropDown.options = HARDWAREDEVICE_DROPDownOption;
+        }
+
     }
 
 
@@ -76,7 +111,7 @@ public class AddNodeUICtr : MonoBehaviour
         {
             udpPort = tempint;
         }
-        int deviceType = NodeUiDropDown.value;
+        int deviceType =Utility.ConvertDropDownValueToDeviceType(NodeUiDropDown.value,ValueSheet.currentSelectSection.sectionType);
 
         Debug.Log(deviceType);
 
@@ -110,7 +145,16 @@ public class AddNodeUICtr : MonoBehaviour
 
     public void BtnTypeDropDownValueChanged(Dropdown _dropdown)
     {
-        UIS[_dropdown.value].Show();
+
+        if(ValueSheet.currentSelectSection.sectionType== SectionType.MediaSection)
+        {
+            MediaSectionUIS[_dropdown.value].Show();
+        }
+        else if (ValueSheet.currentSelectSection.sectionType == SectionType.HardWareSection)
+        {
+            UIS[_dropdown.value].Show();
+
+        }
     }
 }
 

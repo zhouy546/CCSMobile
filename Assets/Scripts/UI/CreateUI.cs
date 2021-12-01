@@ -11,7 +11,7 @@ public class CreateUI : MonoBehaviour
     [SerializeField]
     private Object g_Page;
     [SerializeField]
-    private Object g_Section;
+    public Object[] g_Sections;
 
     [SerializeField]
     public Object[] g_btns;
@@ -27,7 +27,6 @@ public class CreateUI : MonoBehaviour
 
         g_CCS=  Resources.Load("Prefabs/CCS", typeof(GameObject));
         g_Page = Resources.Load("Prefabs/Page", typeof(GameObject));
-        g_Section = Resources.Load("Prefabs/SectionNode", typeof(GameObject));
     }
 
     public Page CreatePage()
@@ -37,9 +36,9 @@ public class CreateUI : MonoBehaviour
        return tempG_page.GetComponent<Page>();
     }
 
-    public Section CreateSection()
+    public Section CreateSection(int index)
     {
-        GameObject tempG_section = Instantiate(g_Section, ValueSheet.currentSelectPage.SectionParent) as GameObject;
+        GameObject tempG_section = Instantiate(g_Sections[index], ValueSheet.currentSelectPage.SectionParent) as GameObject;
 
         return tempG_section.GetComponent<Section>();
     }
@@ -64,7 +63,9 @@ public class CreateUI : MonoBehaviour
 
             for (int j = 0; j < ValueSheet.m_MobileCCS_JsonBridge.page_JsonBridges[i].Section_JsonBridges.Count; j++)
             {
-                GameObject tempG_section = Instantiate(g_Section, temppage.SectionParent) as GameObject;
+                int sectionType = ValueSheet.m_MobileCCS_JsonBridge.page_JsonBridges[i].Section_JsonBridges[j].sectionType;
+
+                GameObject tempG_section = Instantiate(g_Sections[sectionType], temppage.SectionParent) as GameObject;
 
                 Section tempsection = tempG_section.GetComponent<Section>();
           
@@ -79,7 +80,7 @@ public class CreateUI : MonoBehaviour
 
                     nodes.Add(node);
                 }
-                tempsection.INI(ValueSheet.m_MobileCCS_JsonBridge.page_JsonBridges[i].Section_JsonBridges[j].SectionName, temppage, nodes);
+                tempsection.INI(ValueSheet.m_MobileCCS_JsonBridge.page_JsonBridges[i].Section_JsonBridges[j], temppage, nodes);
 
                 sections.Add(tempsection);
             }

@@ -8,7 +8,7 @@ public class Page : MonoBehaviour
     #region jsonArea
     public int pageNum;
 
-    public List<Section> Section = new List<Section>();
+    public List<Section> m_Section = new List<Section>();
 
     #endregion
 
@@ -31,7 +31,7 @@ public class Page : MonoBehaviour
     {
         pageNum = _pageNum;
 
-        Section = _Section;
+        m_Section = _Section;
 
         PageTitletext.text = _pageTitle;
 
@@ -73,17 +73,21 @@ public class Page : MonoBehaviour
         TitleSubmitBtn.gameObject.SetActive(false);
     }
 
-    public void SectionADD()
+    public void SectionADD(int index)
     {
         ValueSheet.currentSelectPage = this;
 
-        Section temp = CreateUI.instance.CreateSection();
+        Section temp = CreateUI.instance.CreateSection(index);
 
         List<Node> nodes = new List<Node>();
 
-        temp.INI("defaultName", this, nodes);
+        List<Node_JsonBridge> node_JsonBridges = new List<Node_JsonBridge>();
 
-        Section.Add(temp);
+        Section_JsonBridge section_JsonBridge = new Section_JsonBridge("defaultName", index, node_JsonBridges);
+
+        temp.INI(section_JsonBridge, this, nodes);
+
+        m_Section.Add(temp);
     }
 
     private void OnDestroy()

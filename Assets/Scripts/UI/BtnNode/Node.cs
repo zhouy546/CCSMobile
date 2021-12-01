@@ -44,6 +44,11 @@ public class Node : MonoBehaviour
 
     }
 
+    public virtual void OffClick()
+    {
+
+    }
+
     public virtual int getUDPPort()
     {
         return 0;
