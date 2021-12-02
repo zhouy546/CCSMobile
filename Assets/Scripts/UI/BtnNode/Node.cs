@@ -71,7 +71,7 @@ public class Node : MonoBehaviour
 
     public virtual void OnDestroy()
     {
-        EventCenter.AddListener<bool>(EventDefine.OnEditUIClick, OnEdit);
+        EventCenter.RemoveListener<bool>(EventDefine.OnEditUIClick, OnEdit);
     }
 
     private void OnEdit(bool b)

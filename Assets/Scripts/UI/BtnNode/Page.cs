@@ -92,7 +92,7 @@ public class Page : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventCenter.AddListener<bool>(EventDefine.OnEditUIClick, OnEdit);
+        EventCenter.RemoveListener<bool>(EventDefine.OnEditUIClick, OnEdit);
     }
 
 

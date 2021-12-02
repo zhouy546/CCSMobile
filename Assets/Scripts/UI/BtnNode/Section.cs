@@ -21,7 +21,9 @@ public class Section : MonoBehaviour
 
     public GameObject DeleteBtn;
 
+    public GameObject EditTitleBtn;
 
+    public GameObject EditTitleInputField;
 
 
 
@@ -39,6 +41,11 @@ public class Section : MonoBehaviour
         EventCenter.AddListener<bool>(EventDefine.OnEditUIClick, OnEdit);
 
         OnEdit(ValueSheet.isEditMode);
+    }
+
+    public virtual void OnDestroy()
+    {
+        EventCenter.RemoveListener<bool>(EventDefine.OnEditUIClick, OnEdit);
     }
 
 
@@ -67,6 +74,24 @@ public class Section : MonoBehaviour
         AddNodeBtn.SetActive(b);
 
         DeleteBtn.SetActive(b);
+
+        EditTitleBtn.SetActive(b);
+    }
+
+    public virtual void OnTitleInputFieldValueChanged()
+    {
+        InputField input = EditTitleInputField.GetComponent<InputField>();
+        TitleText.text = SectionName = input.text;
+    }
+
+    public virtual void OnEditTitleBtnClick()
+    {
+        EditTitleInputField.SetActive(true);
+    }
+
+    public virtual void OnEditTitleInputFieldSubmitClick()
+    {
+        EditTitleInputField.SetActive(false);
     }
 
 }

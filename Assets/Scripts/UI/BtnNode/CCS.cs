@@ -141,7 +141,7 @@ public class CCS : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventCenter.AddListener<bool>(EventDefine.OnEditUIClick, OnEdit);
+        EventCenter.RemoveListener<bool>(EventDefine.OnEditUIClick, OnEdit);
     }
 
     public void GoNext()
