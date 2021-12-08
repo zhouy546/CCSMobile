@@ -23,6 +23,8 @@ public class AddNodeUICtr : MonoBehaviour
 
     public Dropdown lightidDropdown;
 
+    public Dropdown lightCirDropdown;
+
     public Dropdown projectorSerialDropdown;
 
     public InputField sendContentInputField;
@@ -115,6 +117,9 @@ public class AddNodeUICtr : MonoBehaviour
 
         Debug.Log(deviceType);
 
+        int lightcir = lightCirDropdown.value;
+
+        Debug.Log(lightcir);
         string BtnName = btnNameInputField.text;
         string lightID = lightidDropdown.options[lightidDropdown.value].text;
         string[] sendContent = Utility.convertStringtoStringArray(sendContentInputField.text);
@@ -122,7 +127,7 @@ public class AddNodeUICtr : MonoBehaviour
 
 
 
-        Node_JsonBridge node_JsonBridge = new Node_JsonBridge(ip, deviceip, tcpPort, udpPort, deviceType, BtnName, lightID, sendContent, ProjectorSerial);
+        Node_JsonBridge node_JsonBridge = new Node_JsonBridge(ip, deviceip, tcpPort, udpPort, deviceType, BtnName, lightID, lightcir, sendContent, ProjectorSerial);
         Node TEMPNODE =  Utility.CreateNode(CreateUI.instance, node_JsonBridge, ValueSheet.currentSelectSection.btnParent);
 
         TEMPNODE.INI(node_JsonBridge,ValueSheet.currentSelectSection);

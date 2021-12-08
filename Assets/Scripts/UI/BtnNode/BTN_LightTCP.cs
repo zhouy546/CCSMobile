@@ -7,6 +7,7 @@ public class BTN_LightTCP : Node
 {
     public int TCPPort;
     public string lightID;
+    public int lightcir;
     public Text TitleText;
 
     // Start is called before the first frame update
@@ -26,6 +27,7 @@ public class BTN_LightTCP : Node
         base.INI(_node_JsonBridge, parentSection);
         TCPPort = _node_JsonBridge.TCPport;
         lightID = _node_JsonBridge.LightID;
+        lightcir = _node_JsonBridge.LightCir;
         TitleText.text = _node_JsonBridge.btn_name;
     }
 
@@ -39,7 +41,10 @@ public class BTN_LightTCP : Node
         return TCPPort;
     }
 
-
+    public override int getLightCir()
+    {
+        return lightcir;
+    }
 
     public override void Onclick()
     {
@@ -49,7 +54,7 @@ public class BTN_LightTCP : Node
         {
 
 
-            string str = lightID + " " + ValueSheet.LightCmd[0];
+            string str = lightID + " " + /*"06 00 0 00 01"*/ValueSheet.LightUnitONCmd[lightcir];
 
             Debug.Log(str);
 
@@ -68,7 +73,7 @@ public class BTN_LightTCP : Node
 
 
 
-            string str = lightID + " " + ValueSheet.LightCmd[1];
+            string str = lightID + " " + /*"06 00 05 00 00"*/ ValueSheet.LightUnitOFFCmd[lightcir];
 
             Debug.Log(str);
 

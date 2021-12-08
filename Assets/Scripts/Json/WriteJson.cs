@@ -47,7 +47,7 @@ public class WriteJson : MonoBehaviour
 
         List<Page_JsonBridge> Pages = new List<Page_JsonBridge>();
 
-        Node_JsonBridge tempNode = new Node_JsonBridge("192.168.80.248","192.168.20.254",4000,29010,0,"默认按钮","03", tempstr);
+        Node_JsonBridge tempNode = new Node_JsonBridge("192.168.80.248","192.168.20.254",4000,29010,0,"默认按钮","03",0, tempstr);
 
         tempNodes.Add(tempNode);
 
@@ -96,9 +96,10 @@ public class WriteJson : MonoBehaviour
                     int deviceType = tempNodee.deviceType;
                     string _name = tempNodee.BtnName;
                     string lightid = tempNodee.getLightID();
+                    int lightCir = tempNodee.getLightCir();
                     string[] onclicksend = tempNodee.OnClicksend;
                     string projectserial = tempNodee.getProjectorSerial();
-                    Node_JsonBridge tempNode = new Node_JsonBridge(ip, pcdeviceip, tcpPort, udpPort, deviceType, _name, lightid, onclicksend, projectserial);
+                    Node_JsonBridge tempNode = new Node_JsonBridge(ip, pcdeviceip, tcpPort, udpPort, deviceType, _name, lightid, lightCir,onclicksend, projectserial);
                     nodesBridges.Add(tempNode);
                 }
                 Section_JsonBridge tempSection = new Section_JsonBridge(ccs.page[i].m_Section[j].SectionName, Utility.convertSectionTypeToInt(ccs.page[i].m_Section[j]), nodesBridges);

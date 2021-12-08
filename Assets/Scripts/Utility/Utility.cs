@@ -129,6 +129,8 @@ public class Utility : MonoBehaviour
     //十六进制字符串转byte数组
     public static byte[] strToToHexByte(string hexString)
     {
+        Debug.Log(hexString);
+
         hexString = hexString.Replace(" ", "");
         if ((hexString.Length % 2) != 0)
             hexString += " ";

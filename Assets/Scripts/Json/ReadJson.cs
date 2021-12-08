@@ -70,6 +70,9 @@ public class ReadJson : MonoBehaviour
                     int deviceType = int.Parse(_itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["deviceType"].ToString());
                     string m_Name = _itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["btn_name"].ToString();
                     string lightid = _itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["LightID"].ToString();
+                    int LightCir = int.Parse(_itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["LightCir"].ToString());
+
+
                     string ProjectorSerial = _itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["ProjectorSerial"].ToString();
                     
                     List<string> OnClicksend = new List<string>();
@@ -78,7 +81,7 @@ public class ReadJson : MonoBehaviour
                         OnClicksend.Add(_itemDate["page_JsonBridges"][i]["Section_JsonBridges"][k]["node_JsonBridges"][j]["OnClicksend"][m].ToString());
                     }
                     
-                    Node_JsonBridge node_JsonBridge = new Node_JsonBridge(ip, deviceip, TCPport, UDPport, deviceType, m_Name, lightid, OnClicksend.ToArray(), ProjectorSerial);
+                    Node_JsonBridge node_JsonBridge = new Node_JsonBridge(ip, deviceip, TCPport, UDPport, deviceType, m_Name, lightid, LightCir, OnClicksend.ToArray(), ProjectorSerial);
                     tempNode_JsonBridges.Add(node_JsonBridge);
                 }
 

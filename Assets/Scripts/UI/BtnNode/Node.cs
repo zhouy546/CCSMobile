@@ -59,6 +59,11 @@ public class Node : MonoBehaviour
         return 0;
     }
 
+    public virtual int getLightCir()
+    {
+        return 0;
+    }
+
     public virtual string getLightID()
     {
         return "null";
@@ -68,6 +73,8 @@ public class Node : MonoBehaviour
     {
         return "null";
     }
+
+
 
     public virtual void OnDestroy()
     {
