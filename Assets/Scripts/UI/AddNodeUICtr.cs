@@ -36,6 +36,8 @@ public class AddNodeUICtr : MonoBehaviour
     List<Dropdown.OptionData> MEDIATYPE_DROPDownOption = new List<Dropdown.OptionData>();
 
     List<Dropdown.OptionData> HARDWAREDEVICE_DROPDownOption = new List<Dropdown.OptionData>();
+
+    public bool isCreateNewNode = true;
     public void Awake()
     {
         if (instance==null)
@@ -92,16 +94,49 @@ public class AddNodeUICtr : MonoBehaviour
 
     }
 
+    public void getbtnValue(Node node)
+    {
+        ipInputField.text = node.ip;
+
+        tcpPortInputField.text = node.getTCPPort().ToString();
+
+        udpPortInputField.text = node.getUDPPort().ToString();
+
+        sendContentInputField.text = Utility.convertStringArraytoString(node.OnClicksend);
+
+        btnNameInputField.text = node.BtnName;
+
+        if (node.parentSection.sectionType == SectionType.MediaSection)
+        {
+            NodeUiDropDown.options = MEDIATYPE_DROPDownOption;
+
+            NodeUiDropDown.value = node.deviceType;
+        }
+        else if (node.parentSection.sectionType == SectionType.HardWareSection)
+        {
+            NodeUiDropDown.options = HARDWAREDEVICE_DROPDownOption;
+
+            NodeUiDropDown.value = node.deviceType-1;
+        }
+
+        lightCirDropdown.value = node.getLightCir();
+
+        lightidDropdown.value = Utility.convertLightIDToDropDownVal(node.getLightID());
+
+        projectorSerialDropdown.value = 0;
+       
+    }
+
 
     public void Submit()
     {
-        string ip = ipInputField.text;
-        string deviceip = ipInputField.text;
+        string ip = ipInputField.text;//
+        string deviceip = ipInputField.text;//
 
 
         int tempint = 0;
         bool b = int.TryParse(tcpPortInputField.text, out tempint);
-        int tcpPort=0;
+        int tcpPort=0;//
         int udpPort = 29010;
         if (b)
         {
@@ -111,7 +146,7 @@ public class AddNodeUICtr : MonoBehaviour
         b = int.TryParse(udpPortInputField.text, out tempint);
         if (b)
         {
-            udpPort = tempint;
+            udpPort = tempint;//
         }
         int deviceType =Utility.ConvertDropDownValueToDeviceType(NodeUiDropDown.value,ValueSheet.currentSelectSection.sectionType);
 
@@ -120,25 +155,32 @@ public class AddNodeUICtr : MonoBehaviour
         int lightcir = lightCirDropdown.value;
 
         Debug.Log(lightcir);
-        string BtnName = btnNameInputField.text;
+        string BtnName = btnNameInputField.text;//
         string lightID = lightidDropdown.options[lightidDropdown.value].text;
-        string[] sendContent = Utility.convertStringtoStringArray(sendContentInputField.text);
+        string[] sendContent = Utility.convertStringtoStringArray(sendContentInputField.text);//
         string ProjectorSerial = "PJLink";
 
 
 
         Node_JsonBridge node_JsonBridge = new Node_JsonBridge(ip, deviceip, tcpPort, udpPort, deviceType, BtnName, lightID, lightcir, sendContent, ProjectorSerial);
-        Node TEMPNODE =  Utility.CreateNode(CreateUI.instance, node_JsonBridge, ValueSheet.currentSelectSection.btnParent);
-
-        TEMPNODE.INI(node_JsonBridge,ValueSheet.currentSelectSection);
-
-        if (TEMPNODE == null)
+        if (isCreateNewNode)
         {
-            return;
+            Node TEMPNODE = Utility.CreateNode(CreateUI.instance, node_JsonBridge, ValueSheet.currentSelectSection.btnParent);
+
+            TEMPNODE.INI(node_JsonBridge, ValueSheet.currentSelectSection);
+
+            if (TEMPNODE == null)
+            {
+                return;
+            }
+            else
+            {
+                ValueSheet.currentSelectSection.node.Add(TEMPNODE);
+            }
         }
-        else
+        else//…Ë÷√µ±«∞Node
         {
-            ValueSheet.currentSelectSection.node.Add(TEMPNODE);
+            ValueSheet.currentSelectNode.SetVal(node_JsonBridge);
         }
 
         OffUi();

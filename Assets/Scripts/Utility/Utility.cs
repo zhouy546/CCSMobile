@@ -34,10 +34,82 @@ public class Utility : MonoBehaviour
         return "null";
     }
 
+    public static int convertLightIDToDropDownVal(string s)
+    {
+        if (s == "03")
+        {
+            return 0; 
+        }else if(s=="04")
+        {
+            return 1;
+        }
+        else if (s == "05")
+        {
+            return 2;
+        }
+        else if (s == "06")
+        {
+            return 3;
+        }
+        else if (s == "07")
+        {
+            return 4;
+        }
+        else if (s == "08")
+        {
+            return 5;
+        }
+        else if (s == "09")
+        {
+            return 6;
+        }
+        else if (s == "0A")
+        {
+            return 7;
+        }
+        else if (s == "0B")
+        {
+            return 8;
+        }
+        else if (s == "0C")
+        {
+            return 9;
+        }
+        else if (s == "0D")
+        {
+            return 10;
+        }
+        else if (s == "0E")
+        {
+            return 11;
+        }
+
+
+        return 0;
+    }
+
 
     public static string[] convertStringtoStringArray(string s)
     {
         return s.Split('-');
+    }
+
+    public static string convertStringArraytoString(string[] s)
+    {
+        string temp = "";
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (i == 0)
+            {
+                temp = s[0];
+            }
+            else
+            {
+                temp = temp + "-" + s[i];
+            }
+   
+        }
+        return temp;
     }
 
     public static DeviceType GetDeviceType(Node_JsonBridge node_JsonBridge)
@@ -77,7 +149,6 @@ public class Utility : MonoBehaviour
         {
             return index + 1;
         }
-
         return 0;
     }
 

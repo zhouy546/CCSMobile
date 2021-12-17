@@ -1951,6 +1951,7 @@ MonoBehaviour:
   lightCirDropdown: {fileID: 1290503701}
   projectorSerialDropdown: {fileID: 1307487553}
   sendContentInputField: {fileID: 2128454705}
+  isCreateNewNode: 0
 --- !u!1 &506061622
 GameObject:
   m_ObjectHideFlags: 0

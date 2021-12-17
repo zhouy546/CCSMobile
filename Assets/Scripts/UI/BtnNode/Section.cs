@@ -54,6 +54,8 @@ public class Section : MonoBehaviour
         ValueSheet.currentSelectSection = this;
 
         AddNodeUICtr.instance.TurnOnMe();
+
+        AddNodeUICtr.instance.isCreateNewNode = true;
     }
 
     public virtual void SectionDelete()

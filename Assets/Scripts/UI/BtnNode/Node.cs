@@ -39,6 +39,19 @@ public class Node : MonoBehaviour
 
     }
 
+    public virtual void SetVal(Node_JsonBridge node_JsonBridge)
+    {
+        ip = node_JsonBridge.ip;
+        deviceip = node_JsonBridge.deviceip;
+        deviceType = node_JsonBridge.deviceType;
+        BtnName = node_JsonBridge.btn_name;
+        OnClicksend = node_JsonBridge.OnClicksend;
+    }
+
+    public virtual void SetBtn()
+    {
+
+    }
     public virtual void Onclick()
     {
 

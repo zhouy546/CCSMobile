@@ -31,6 +31,30 @@ public class BTN_LightTCP : Node
         TitleText.text = _node_JsonBridge.btn_name;
     }
 
+    public override void SetVal(Node_JsonBridge _node_JsonBridge)
+    {
+        base.SetVal(_node_JsonBridge);
+
+        TCPPort = _node_JsonBridge.TCPport;
+        lightID = _node_JsonBridge.LightID;
+        lightcir = _node_JsonBridge.LightCir;
+        TitleText.text = _node_JsonBridge.btn_name;
+    }
+
+    public override void SetBtn()
+    {
+        AddNodeUICtr.instance.isCreateNewNode = false;
+
+        ValueSheet.currentSelectNode = this;
+
+        ValueSheet.currentSelectSection = parentSection;
+
+        AddNodeUICtr.instance.TurnOnMe();
+
+        AddNodeUICtr.instance.getbtnValue(this);
+
+    }
+
     public override string getLightID()
     {
         return lightID;

@@ -28,7 +28,20 @@ public class BTN_PCUDP : Node
         btnText.text = _node_JsonBridge.btn_name;
     }
 
-    
+    public override void SetBtn()
+    {
+        AddNodeUICtr.instance.isCreateNewNode = false;
+
+        ValueSheet.currentSelectNode = this;
+
+        ValueSheet.currentSelectSection = parentSection;
+
+        AddNodeUICtr.instance.TurnOnMe();
+
+        AddNodeUICtr.instance.getbtnValue(this);
+    }
+
+
 
     public override void Onclick()
     {
