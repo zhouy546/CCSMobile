@@ -4,8 +4,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-
-public class BTN_PCUDP : Node
+using UnityEngine.EventSystems;
+public class BTN_PCUDP : Node ,IPointerEnterHandler,IPointerExitHandler
 {
     public int udpPort;
     public Text btnText;
@@ -79,5 +79,16 @@ public class BTN_PCUDP : Node
         parentSection.node.Remove(this);
 
         base.DestoryBtn();
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        this.GetComponent<Image>().sprite = CreateUI.instance.udp_HeighlightBtn;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        this.GetComponent<Image>().sprite = CreateUI.instance.udp_DeheighlightBtn;
+
     }
 }

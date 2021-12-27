@@ -16,6 +16,9 @@ public class CreateUI : MonoBehaviour
     [SerializeField]
     public Object[] g_btns;
     // Start is called before the first frame update
+
+    public Sprite udp_HeighlightBtn, udp_DeheighlightBtn;
+
     void Awake()
     {
         if (instance == null)
