@@ -43,11 +43,14 @@ public class BTN_LightTCP : Node
 
     public override void SetBtn()
     {
+    
         AddNodeUICtr.instance.isCreateNewNode = false;
 
         ValueSheet.currentSelectNode = this;
 
         ValueSheet.currentSelectSection = parentSection;
+
+        Debug.Log(ValueSheet.currentSelectSection.sectionType);
 
         AddNodeUICtr.instance.TurnOnMe();
 

@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TitleText: {fileID: 304152356057100915}
   SectionName: 
-  sectionType: 0
+  sectionType: 1
   node: []
   parentPage: {fileID: 0}
   btnParent: {fileID: 6868498159624291742}

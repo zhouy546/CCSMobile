@@ -74,23 +74,41 @@ public class AddNodeUICtr : MonoBehaviour
 
     private void OnEnable()
     {
-        
+        if (ValueSheet.currentSelectSection.sectionType == SectionType.MediaSection)
+        {
+            NodeUiDropDown.value = 0;
+
+        }
+        else if (ValueSheet.currentSelectSection.sectionType == SectionType.HardWareSection)
+        {
+
+            NodeUiDropDown.value = 3;
+
+        }
         BtnTypeDropDownValueChanged(NodeUiDropDown);
 
-    
+    }
+
+    private IEnumerator Coroutineini()
+    {
+        yield return new WaitForSeconds(0.2f);
+      
     }
 
     public void TurnOnMe()
     {
-       gameObject.SetActive(true);
         if (ValueSheet.currentSelectSection.sectionType == SectionType.MediaSection)
         {
+
             NodeUiDropDown.options = MEDIATYPE_DROPDownOption;
         }
         else if (ValueSheet.currentSelectSection.sectionType == SectionType.HardWareSection)
         {
+
+
             NodeUiDropDown.options = HARDWAREDEVICE_DROPDownOption;
         }
+        gameObject.SetActive(true);
 
     }
 

@@ -53,6 +53,8 @@ public class Section : MonoBehaviour
     {
         ValueSheet.currentSelectSection = this;
 
+        Debug.Log(ValueSheet.currentSelectSection.sectionType);
+
         AddNodeUICtr.instance.TurnOnMe();
 
         AddNodeUICtr.instance.isCreateNewNode = true;

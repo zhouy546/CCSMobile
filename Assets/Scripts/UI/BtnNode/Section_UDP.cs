@@ -20,6 +20,7 @@ public class Section_UDP : Section
 
     public override void ShowAddNodeUI()
     {
+        //ValueSheet.currentSelectSection.sectionType = base.sectionType;
         base.ShowAddNodeUI();
     }
 

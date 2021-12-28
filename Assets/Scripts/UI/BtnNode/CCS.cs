@@ -8,7 +8,7 @@ public class CCS : MonoBehaviour
 
     public List<Page> page = new List<Page>();
 
-    public GameObject g_AddPage;
+    public GameObject[] g_Add_DeletePage;
     public void INI(string _CCSNAME, List<Page> _page)
     {
         CCSNAME = _CCSNAME;
@@ -65,14 +65,54 @@ public class CCS : MonoBehaviour
             ValueSheet.currentSelectPage.Next = temp;
         }
 
-
-
-
-
         ValueSheet.currentSelectPage.MoveAway();
         temp.MoveIn();
 
         ValueSheet.currentSelectPage = temp;
+
+    }
+
+    public void DeletePage()
+    {
+
+        Page temp = null;
+
+        if (ValueSheet.currentSelectPage.Pervious==null&& ValueSheet.currentSelectPage.Next == null)
+        {
+            temp = ValueSheet.currentSelectPage;
+            //page.Remove(ValueSheet.currentSelectPage);
+        }
+        else if(ValueSheet.currentSelectPage.Pervious != null&&ValueSheet.currentSelectPage.Next != null)
+        {
+            ValueSheet.currentSelectPage.Pervious.Next = ValueSheet.currentSelectPage.Next;
+
+            ValueSheet.currentSelectPage.Next.Pervious = ValueSheet.currentSelectPage.Pervious;
+            
+            temp = ValueSheet.currentSelectPage.Next;
+
+            page.Remove(ValueSheet.currentSelectPage);
+
+        }
+        else if(ValueSheet.currentSelectPage.Pervious == null&&ValueSheet.currentSelectPage.Next != null)
+        {
+            ValueSheet.currentSelectPage.Next.Pervious = ValueSheet.currentSelectPage.Pervious;
+
+            temp = ValueSheet.currentSelectPage.Next;
+
+            page.Remove(ValueSheet.currentSelectPage);
+        }
+        else if (ValueSheet.currentSelectPage.Pervious != null && ValueSheet.currentSelectPage.Next == null)
+        {
+            ValueSheet.currentSelectPage.Pervious.Next = ValueSheet.currentSelectPage.Next;
+
+            temp = ValueSheet.currentSelectPage.Pervious;
+
+            page.Remove(ValueSheet.currentSelectPage);
+        }
+
+        Destroy(ValueSheet.currentSelectPage.gameObject, 0.2f);
+        ValueSheet.currentSelectPage = temp;
+        temp.MoveIn();
 
     }
 
@@ -136,7 +176,10 @@ public class CCS : MonoBehaviour
 
     private void OnEdit(bool b)
     {
-        g_AddPage.SetActive(b);
+        for (int i = 0; i < g_Add_DeletePage.Length; i++)
+        {
+            g_Add_DeletePage[i].SetActive(b);
+        }
     }
 
     private void OnDestroy()
