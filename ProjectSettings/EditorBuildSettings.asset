@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/portrait.unity
     guid: ee27c8863ce3d7a46b698b358badbcac
+  - enabled: 1
+    path: Assets/Scenes/HeardWare.unity
+    guid: e4dee885ce68a474183870a866f52270
   m_configObjects: {}

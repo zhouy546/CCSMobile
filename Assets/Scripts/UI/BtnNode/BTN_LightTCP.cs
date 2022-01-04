@@ -88,6 +88,7 @@ public class BTN_LightTCP : Node
             string sendstr = str + " " + CRC.CRCCalc(str);
 
             Threadtcp tcp_thread = new Threadtcp(ip, TCPPort, sendstr, false);
+
             tcp_thread.sendHexString();
 
         }

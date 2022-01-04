@@ -775,7 +775,7 @@ GameObject:
   - component: {fileID: 6868498159624291742}
   - component: {fileID: 8927337342228754190}
   - component: {fileID: 5794563874171054786}
-  - component: {fileID: 6758618912626185023}
+  - component: {fileID: 1356498346917128165}
   m_Layer: 5
   m_Name: btns
   m_TagString: Untagged
@@ -840,7 +840,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &6758618912626185023
+--- !u!114 &1356498346917128165
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -849,21 +849,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 5244580790510786390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Script: {fileID: 11500000, guid: 90beef7b134de614fb4791bd854cf647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 12
+    m_Left: 50
     m_Right: 0
     m_Top: 0
-    m_Bottom: 0
-  m_ChildAlignment: 0
-  m_StartCorner: 0
-  m_StartAxis: 0
-  m_CellSize: {x: 200, y: 100}
-  m_Spacing: {x: 12, y: 12}
-  m_Constraint: 0
-  m_ConstraintCount: 2
+    m_Bottom: 25
+  m_ChildAlignment: 4
+  fitType: 0
+  rows: 0
+  columns: 4
+  cellSize: {x: 191, y: NaN}
+  spacing: {x: 12, y: 12}
 --- !u!1 &5846473657681010129
 GameObject:
   m_ObjectHideFlags: 0
