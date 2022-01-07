@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class BTN_PCGroupTcp : MonoBehaviour
 {
+    public lightgroupunit floorDeviceUnit;
+
     public List<PCgroupunit> PCgroupunits = new List<PCgroupunit>();
 
     public void SetOnClickCallBack()
@@ -25,6 +27,10 @@ public class BTN_PCGroupTcp : MonoBehaviour
     {
         Debug.Log("pc¿ª");
         EventCenter.Broadcast(EventDefine.OnGroupbtnStartProcess);
+
+        floorDeviceUnit.Onclick();
+
+        yield return new WaitForSeconds(15);
 
         foreach (var item in PCgroupunits)
         {
@@ -58,6 +64,11 @@ public class BTN_PCGroupTcp : MonoBehaviour
 
             item.OffClick();
         }
+
+
+        yield return new WaitForSeconds(15);
+
+        floorDeviceUnit.Onclick();
 
         EventCenter.Broadcast(EventDefine.OnGroupbtnEndtProcess);
     }

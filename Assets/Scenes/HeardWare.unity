@@ -1800,6 +1800,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c136228998112141aefe3763d971c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorDeviceUnit:
+    name: "3\u697C\u8BBE\u5907\u7535"
+    ip: 192.168.0.120
+    port: 28010
+    lightcir: 3
+    lightID: 03
   PCgroupunits:
   - name: 51
     ip: 192.168.20.51
@@ -3218,6 +3224,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c136228998112141aefe3763d971c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorDeviceUnit:
+    name: "2\u697C\u8BBE\u5907\u7535"
+    ip: 192.168.0.120
+    port: 28010
+    lightcir: 2
+    lightID: 03
   PCgroupunits:
   - name: 10
     ip: 192.168.20.10
@@ -5479,6 +5491,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c136228998112141aefe3763d971c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorDeviceUnit:
+    name: "4\u697C\u8BBE\u5907\u7535"
+    ip: 192.168.0.120
+    port: 28010
+    lightcir: 4
+    lightID: 03
   PCgroupunits:
   - name: 60
     ip: 192.168.20.60
@@ -10633,6 +10651,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c136228998112141aefe3763d971c17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floorDeviceUnit:
+    name: "1\u697C\u8BBE\u5907\u7535"
+    ip: 192.168.0.120
+    port: 28010
+    lightcir: 1
+    lightID: 03
   PCgroupunits:
   - name: 13
     ip: 192.168.20.13

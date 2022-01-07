@@ -67,7 +67,7 @@ public class BTN_AllDeviceGroupTcp : MonoBehaviour
             item.Onclick();
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(15);
 
         foreach (var item in lightgroupunits)
         {
@@ -139,7 +139,7 @@ public class BTN_AllDeviceGroupTcp : MonoBehaviour
             item.OffClick();
         }
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(15);
 
         foreach (var item in DeviceMainEletri)
         {

@@ -1,0 +1,2 @@
+com.Multispace.MediaControl
+com.Multispace.HardwareControl

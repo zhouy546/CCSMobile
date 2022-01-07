@@ -12,6 +12,8 @@ public class EditUI : MonoBehaviour
     public GameObject G_pageEditor;
     public GameObject G_selectEditor;
 
+    public GameObject G_pswUI;
+    public InputField pswInput;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,38 @@ public class EditUI : MonoBehaviour
     {
         
     }
+
+    public bool CheckPassword(string psw)
+    {
+        return psw == "hh888899990";
+    }
+
+
+    public void OnPswSubmit()
+    {
+        bool b = CheckPassword(pswInput.text);
+
+        if (b)
+        {
+            OnEditUIClick();
+            ClosePswUI();
+        }
+        else
+        {
+            pswInput.text = "√‹¬Î¥ÌŒÛ";
+        }
+    }
+
+    public void ClosePswUI()
+    {
+        G_pswUI.SetActive(false);
+    }
+    public void ShowPswUI()
+    {
+        G_pswUI.SetActive(true);
+        pswInput.text = "";
+    }
+
 
 
     public void OnEditUIClick()
