@@ -41,6 +41,13 @@ public class BTN_PCUDP : Node ,IPointerEnterHandler,IPointerExitHandler
         AddNodeUICtr.instance.getbtnValue(this);
     }
 
+    public override void SetVal(Node_JsonBridge node_JsonBridge)
+    {
+        base.SetVal(node_JsonBridge);
+        btnText.text = node_JsonBridge.btn_name;
+        udpPort = node_JsonBridge.UDPport;
+    }
+
 
 
     public override void Onclick()
