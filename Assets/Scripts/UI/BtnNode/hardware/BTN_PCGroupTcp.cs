@@ -4,18 +4,28 @@ using UnityEngine;
 
 public class BTN_PCGroupTcp : MonoBehaviour
 {
-    public lightgroupunit floorDeviceUnit;
+   // public lightgroupunit floorDeviceUnit;
 
     public List<PCgroupunit> PCgroupunits = new List<PCgroupunit>();
+    //public BTN_LedGroupTcp LED;
+    //public bool isDebug;
+   // public int id;
+
+    public void Update()
+    {
+
+    }
 
     public void SetOnClickCallBack()
     {
         ProcessBarUpdate.currentCallBack = OnclickCallback;
+        BTN_MainDeviceTcp.instance.HintText.text = "是否要执行此操作";
         EventCenter.Broadcast(EventDefine.ShowWarnning);
     }
     public void SetoffClickCallBack()
     {
         ProcessBarUpdate.currentCallBack = OffClickCallback;
+        BTN_MainDeviceTcp.instance.HintText.text = "是否要执行此操作";
         EventCenter.Broadcast(EventDefine.ShowWarnning);
     }
 
@@ -26,22 +36,17 @@ public class BTN_PCGroupTcp : MonoBehaviour
     private IEnumerator onclick()
     {
         Debug.Log("pc开");
+     
         EventCenter.Broadcast(EventDefine.OnGroupbtnStartProcess);
-
-        floorDeviceUnit.Onclick();
-
-        yield return new WaitForSeconds(15);
-
         foreach (var item in PCgroupunits)
         {
-            ProcessBarUpdate.instance.UpdateFill(PCgroupunits.IndexOf(item)+1, PCgroupunits.Count);
+            ProcessBarUpdate.instance.UpdateFill(PCgroupunits.IndexOf(item) + 1, PCgroupunits.Count);
 
             yield return new WaitForSeconds(1);
 
             item.Onclick();
 
         }
-
         EventCenter.Broadcast(EventDefine.OnGroupbtnEndtProcess);
     }
 
@@ -58,54 +63,12 @@ public class BTN_PCGroupTcp : MonoBehaviour
 
         foreach (var item in PCgroupunits)
         {
-            ProcessBarUpdate.instance.UpdateFill(PCgroupunits.IndexOf(item)+1, PCgroupunits.Count);
+            ProcessBarUpdate.instance.UpdateFill(PCgroupunits.IndexOf(item) + 1, PCgroupunits.Count);
 
             yield return new WaitForSeconds(1);
 
             item.OffClick();
         }
-
-
-        yield return new WaitForSeconds(15);
-
-        floorDeviceUnit.Onclick();
-
         EventCenter.Broadcast(EventDefine.OnGroupbtnEndtProcess);
     }
-}
-
-[System.Serializable]
-public class PCgroupunit
-{
-    public string name;
-    public string ip;
-    public int port;
-
-
-    public void Onclick()
-    {
-
-        if (Utility.checkIp(ip))
-        {
-
-
-            Threadtcp tcp_thread = new Threadtcp(ip, port, ValueSheet.MediaServerCmd[0], false);
-
-            tcp_thread.sendDefaultString();
-
-        }
-    }
-
-    public void OffClick()
-    {
-        if (Utility.checkIp(ip))
-        {
-
-            Threadtcp tcp_thread = new Threadtcp(ip, port, ValueSheet.MediaServerCmd[1], false);
-
-            tcp_thread.sendDefaultString();
-        }
-    }
-
-
 }

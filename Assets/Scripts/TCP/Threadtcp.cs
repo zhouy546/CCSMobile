@@ -68,7 +68,7 @@ public class Threadtcp {
 
         IAsyncResult asyncResult = connect.BeginInvoke(ipep, clientSocket, null, null);
 
-
+        
 
         if (isHeartbeat)
         {
@@ -77,6 +77,8 @@ public class Threadtcp {
 
 
         bool connectSuccess = asyncResult.AsyncWaitHandle.WaitOne(ValueSheet.TcpSendWaitTime, false);
+
+        Debug.Log(connectSuccess);
 
         if (!connectSuccess)
         {
@@ -100,10 +102,10 @@ public class Threadtcp {
 
         Thread.Sleep(500);
 
-        result = ReceiveLEDHex(clientSocket, ValueSheet.TcpReceiveWaitTime); //5*2 seconds timeout.
+        //result = ReceiveLEDHex(clientSocket, ValueSheet.TcpReceiveWaitTime); //5*2 seconds timeout.
                                                     // Debug.Log("Receive：" + result);
 
-        Thread.Sleep(500);
+       // Thread.Sleep(500);
         DestroySocket(clientSocket);
 
     

@@ -52,3 +52,193 @@ public enum SectionType
 {
     MediaSection,HardWareSection,Unknow
 }
+
+
+[System.Serializable]
+public class ledgroupunit: device_node
+{
+    //public string name;
+    //public string ip;
+    //public int port;
+
+
+    public override string getOffStr()
+    {
+        string sendstr = ValueSheet.LEDCmd[1];
+
+        return sendstr;
+    }
+
+    public override string getOnStr()
+    {
+        string sendstr = ValueSheet.LEDCmd[0];
+
+        return sendstr;
+    }
+    public void Onclick()
+    {
+
+        if (Utility.checkIp(ip))
+        {
+
+
+            HardwareTCPThread.instance.tcp_thread = new Threadtcp(ip, port, ValueSheet.LEDCmd[0], false);
+
+            HardwareTCPThread.instance.tcp_thread.sendHexString();
+
+        }
+    }
+
+    public void OffClick()
+    {
+        if (Utility.checkIp(ip))
+        {
+
+            HardwareTCPThread.instance.tcp_thread = new Threadtcp(ip, port, ValueSheet.LEDCmd[1], false);
+
+            HardwareTCPThread.instance.tcp_thread.sendHexString();
+        }
+    }
+
+
+}
+
+[System.Serializable]
+public class PCgroupunit: device_node
+{
+    //public string name;
+    //public string ip;
+    //public int port;
+
+    public override string getOffStr()
+    {
+        string sendstr = ValueSheet.MediaServerCmd[1];
+
+        return sendstr;
+    }
+
+    public override string getOnStr()
+    {
+        string sendstr = ValueSheet.MediaServerCmd[0];
+
+        return sendstr;
+    }
+    public void Onclick()
+    {
+
+        if (Utility.checkIp(ip))
+        {
+
+
+            HardwareTCPThread.instance.tcp_thread = new Threadtcp(ip, port, ValueSheet.MediaServerCmd[0], false);
+
+            HardwareTCPThread.instance.tcp_thread.sendDefaultString();
+
+        }
+    }
+
+    public void OffClick()
+    {
+        if (Utility.checkIp(ip))
+        {
+
+            HardwareTCPThread.instance.tcp_thread = new Threadtcp(ip, port, ValueSheet.MediaServerCmd[1], false);
+
+            HardwareTCPThread.instance.tcp_thread.sendDefaultString();
+        }
+    }
+
+
+}
+
+
+[System.Serializable]
+public class lightgroupunit: device_node
+{
+    //public string name;
+    //public string ip;
+    //public int port;
+    public int lightcir;
+    public string lightID;
+
+
+    public override string getOffStr()
+    {
+        string str = lightID + " " + /*"06 00 05 00 00"*/ ValueSheet.LightUnitOFFCmd[lightcir];
+
+        string sendstr = str + " " + CRC.CRCCalc(str);
+
+        return sendstr;
+    }
+
+    public override string getOnStr()
+    {
+        string str = lightID + " " + /*"06 00 0 00 01"*/ValueSheet.LightUnitONCmd[lightcir];
+
+        string sendstr = str + " " + CRC.CRCCalc(str);
+
+        return sendstr;
+    }
+
+    public void Onclick()
+    {
+
+        if (Utility.checkIp(ip))
+        {
+
+
+            string str = lightID + " " + /*"06 00 0 00 01"*/ValueSheet.LightUnitONCmd[lightcir];
+
+            string sendstr = str + " " + CRC.CRCCalc(str);
+
+            Debug.Log(sendstr);
+
+            HardwareTCPThread.instance.tcp_thread = new Threadtcp(ip, port, sendstr, false);
+
+            HardwareTCPThread.instance.tcp_thread.sendHexString();
+
+        }
+    }
+
+    public void OffClick()
+    {
+        if (Utility.checkIp(ip))
+        {
+            string str = lightID + " " + /*"06 00 05 00 00"*/ ValueSheet.LightUnitOFFCmd[lightcir];
+
+
+            string sendstr = str + " " + CRC.CRCCalc(str);
+
+            //Debug.Log(sendstr);
+
+            HardwareTCPThread.instance.tcp_thread = new Threadtcp(ip, port, sendstr, false);
+            HardwareTCPThread.instance.tcp_thread.sendHexString();
+        }
+    }
+
+
+}
+[System.Serializable]
+public class device_node
+{
+    public string name;
+    public string ip;
+    public int port;
+
+    public virtual string getOffStr()
+    {
+        return "";
+    }
+
+    public virtual string getOnStr()
+    {
+        return "";
+    }
+
+}
+
+public struct LinkInfos
+{
+   public List<device_node> device_Nodes;
+}
+

@@ -37,11 +37,15 @@ public class BTN_AllDeviceGroupTcp : MonoBehaviour
     {
         ProcessBarUpdate.currentCallBack = AllDeviceOnCallback;
         EventCenter.Broadcast(EventDefine.ShowWarnning);
+        BTN_MainDeviceTcp.instance.HintText.text = "是否要执行此操作";
+
     }
     public void SetoffClickCallBack()
     {
         ProcessBarUpdate.currentCallBack = AllDeviceOffCallback;
         EventCenter.Broadcast(EventDefine.ShowWarnning);
+        BTN_MainDeviceTcp.instance.HintText.text = "是否要执行此操作";
+
     }
 
     private void AllDeviceOnCallback()
@@ -67,7 +71,7 @@ public class BTN_AllDeviceGroupTcp : MonoBehaviour
             item.Onclick();
         }
 
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(60);
 
         foreach (var item in lightgroupunits)
         {
@@ -139,7 +143,7 @@ public class BTN_AllDeviceGroupTcp : MonoBehaviour
             item.OffClick();
         }
 
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(30);
 
         foreach (var item in DeviceMainEletri)
         {
