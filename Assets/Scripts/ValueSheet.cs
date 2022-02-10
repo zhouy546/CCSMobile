@@ -41,6 +41,7 @@ public static class ValueSheet
     public static string[] LEDCmd = { "00000000000601050801FF00"/*on*/, "00000000000601050802FF00"/*off*/,};
 
     #endregion
+
 }
 
 public enum DeviceType

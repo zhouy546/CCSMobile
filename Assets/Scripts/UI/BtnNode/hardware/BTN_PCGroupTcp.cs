@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class BTN_PCGroupTcp : MonoBehaviour
 {
-   // public lightgroupunit floorDeviceUnit;
 
     public List<PCgroupunit> PCgroupunits = new List<PCgroupunit>();
-    //public BTN_LedGroupTcp LED;
-    //public bool isDebug;
-   // public int id;
 
     public void Update()
     {
@@ -33,7 +29,7 @@ public class BTN_PCGroupTcp : MonoBehaviour
     {
         StartCoroutine(onclick());
     }
-    private IEnumerator onclick()
+    public IEnumerator onclick()
     {
         Debug.Log("pc¿ª");
      
@@ -42,7 +38,7 @@ public class BTN_PCGroupTcp : MonoBehaviour
         {
             ProcessBarUpdate.instance.UpdateFill(PCgroupunits.IndexOf(item) + 1, PCgroupunits.Count);
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1.5f);
 
             item.Onclick();
 
@@ -55,7 +51,7 @@ public class BTN_PCGroupTcp : MonoBehaviour
         StartCoroutine(offclick());
     }
 
-    private IEnumerator offclick()
+    public IEnumerator offclick()
     {
         Debug.Log("pc¹Ø");
 
@@ -65,7 +61,7 @@ public class BTN_PCGroupTcp : MonoBehaviour
         {
             ProcessBarUpdate.instance.UpdateFill(PCgroupunits.IndexOf(item) + 1, PCgroupunits.Count);
 
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1.5f);
 
             item.OffClick();
         }

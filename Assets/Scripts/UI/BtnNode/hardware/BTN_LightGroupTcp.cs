@@ -51,7 +51,7 @@ public class BTN_LightGroupTcp : MonoBehaviour
     {
         StartCoroutine(onclick());
     }
-    private IEnumerator onclick()
+    public IEnumerator onclick()
     {
 
 
@@ -77,7 +77,7 @@ public class BTN_LightGroupTcp : MonoBehaviour
         StartCoroutine(offclick());
     }
 
-    private IEnumerator offclick()
+    public IEnumerator offclick()
     {
 
 
